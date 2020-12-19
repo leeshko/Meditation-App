@@ -1,0 +1,96 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.app {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+.time, 
+.player {
+    height: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.player {
+    position: relative;
+}
+
+.player svg {
+    position: absolute;
+    height: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.time-display {
+    font-size: 40px;
+    position: absolute;
+    bottom: 20%;
+    color: white;
+}
+
+.play,
+.replay {
+    cursor: pointer;
+    z-index: 2;
+}
+
+.change-sound {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.button-time {
+    width: 40%;
+    height: 10%;
+    font-size: 20px;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.change-sound button {
+    background: none;
+    height: 120px;
+    width: 120px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 50%;
+}
+
+.change-sound button:nth-child(1) {
+    background-color: teal;
+}
+
+.change-sound button:nth-child(2) {
+    background-color: lightsalmon;
+}
+
+.change-sound button img {
+    height: 50%;
+}
+
+.video-container video {
+    position: fixed;
+    top: 0%; 
+    left: 0%;
+    width: 100%;
+    z-index: -2;
+}
