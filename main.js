@@ -8,71 +8,65 @@ const app = () => {
 
     const sounds = document.querySelectorAll('.change-sound button');
     const timeDisplay = document.querySelector('.time-display');
-    const outlineLength = outline.getTotalLength();  
-    
-    let fakeDuration = 600;
+    const outlineLength = outline.getTotalLength();
+
+    let defaultDuration = 600;
     outline.style.strokeDasharray = outlineLength;
     outline.style.strokeDashoffset = outlineLength;
 
     sounds.forEach(sound => {
-        sound.addEventListener('click', function(){
+        sound.addEventListener('click', function () {
             track.src = this.getAttribute('data-sound');
             video.src = this.getAttribute('data-video');
             checkPlaying(track);
         });
     });
 
-    play.addEventListener("click", function() {
+    play.addEventListener('click', () => {
         checkPlaying(track);
     });
 
     const checkPlaying = track => {
-        if(track.paused) {
+        if (track.paused) {
             track.play();
             video.play();
-            play.src = "./svg/pause.svg";
-        }else{
+            play.src = 'svg/pause.svg';
+        } else {
             track.pause();
             video.pause();
-            play.src = './svg/play.svg';
+            play.src = 'svg/play.svg';
         }
     };
 
-    replay.addEventListener("click", function() {
-        restart(track);
-    });
-
-    const restart = track =>{
+    replay.addEventListener('click', () => {
         let currentTime = track.currentTime;
         track.currentTime = 0;
-    }
+    });
 
-    track.ontimeupdate = () =>{
+    track.ontimeupdate = () => {
         let currentTime = track.currentTime;
-        let elapsed = fakeDuration - currentTime;
+        let elapsed = defaultDuration - currentTime;
         let seconds = Math.floor(elapsed % 60);
-        let minutes = Math.floor(elapsed / 60); 
+        let minutes = Math.floor(elapsed / 60);
         timeDisplay.textContent = `${minutes}:${seconds}`;
 
-        let progress = outlineLength - (currentTime/fakeDuration) * outlineLength;
+        let progress = outlineLength - (currentTime / defaultDuration) * outlineLength;
         outline.style.strokeDasharray = progress;
-        
-        if(currentTime >= fakeDuration) {
+
+        if (currentTime >= defaultDuration) {
             track.pause();
-            track.currentTime = 0; 
-            play.src = "./svg/play.svg";
+            track.currentTime = 0;
+            play.src = '(./svg/play.svg)';
             video.pause();
         }
     };
 
     timeSelect.forEach(option => {
-        option.addEventListener('click', function(){
-            fakeDuration = this.getAttribute('data-time');
-            timeDisplay.textContent = `${Math.floor(fakeDuration/60)}:${Math.floor(fakeDuration%60)}`;
+        option.addEventListener('click', function () {
+            defaultDuration = this.getAttribute('data-time');
+            timeDisplay.textContent = `${Math.floor(defaultDuration / 60)}:${Math.floor(defaultDuration % 60)}`;
         });
     });
-
 };
-
 
 app();
