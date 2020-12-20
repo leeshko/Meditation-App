@@ -15,16 +15,14 @@ const app = () => {
     outline.style.strokeDashoffset = outlineLength;
 
     sounds.forEach(sound => {
-        sound.addEventListener('click', function () {
-            track.src = this.getAttribute('data-sound');
-            video.src = this.getAttribute('data-video');
+        sound.addEventListener('click', (event) => {
+            track.src = event.currentTarget.getAttribute('data-sound');
+            video.src = event.currentTarget.getAttribute('data-video');
             checkPlaying(track);
         });
     });
 
-    play.addEventListener('click', () => {
-        checkPlaying(track);
-    });
+    play.addEventListener('click', () => checkPlaying(track));
 
     const checkPlaying = track => {
         if (track.paused) {
@@ -39,7 +37,7 @@ const app = () => {
     };
 
     replay.addEventListener('click', () => {
-        let currentTime = track.currentTime;
+       
         track.currentTime = 0;
     });
 
